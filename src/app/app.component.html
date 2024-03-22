@@ -1,0 +1,82 @@
+<div class="card">
+  <h5 class="card-header ch-color">User Registration</h5>
+  <div class="card-body">
+    <form [formGroup]="registerform" (ngSubmit)="onsubmit()">
+      <div class="row">
+        <div class="form-group col">
+          <label>Title : </label>
+          <input type="text" placeholder="Enter Title" formControlName="title" class="form-control" [ngClass]="{'is-invalid':submitted && f['title'].errors}" />
+        </div>
+        <div class="form-group col-5">
+          <label>Firstname : </label>
+          <input type="text" placeholder="Enter Firstname" formControlName="firstname" class="form-control" [ngClass]="{'is-invalid':submitted && f['firstname'].errors}" />
+        </div>
+        <div class="form-group col-5">
+          <label>Lastname : </label>
+          <input type="text" placeholder="Enter Lastname" formControlName="lastname" class="form-control" [ngClass]="{'is-invalid':submitted && f['lastname'].errors}" />
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="form-group col-6">
+          <label>DOB : </label>
+          <input type="date" placeholder="Enter date of birth" formControlName="dob" class="form-control" [ngClass]="{'is-invalid':submitted && f['dob'].errors}" />
+        </div>
+        <div class="form-group col-6">
+          <label>Email : </label>
+          <input type="email" placeholder="Enter Email" formControlName="email" class="form-control" [ngClass]="{'is-invalid':submitted && f['email'].errors}" />
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="form-group col-6">
+          <label>Password : </label>
+          <input type="password" placeholder="Enter password" formControlName="password" class="form-control" [ngClass]="{'is-invalid':submitted && f['password'].errors}" />
+        </div>
+        <div class="form-group col-6">
+          <label>Confirm password : </label>
+          <input type="password" placeholder="Confirm Password" formControlName="confirmPassword"
+            class="form-control" [ngClass]="{'is-invalid':submitted && f['confirmPassword'].errors}" />
+            <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback" ></div>
+            <div *ngIf="f['confirmPassword'].errors['Match']">Password and Confirm password should be same</div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="form-group col-6">
+          <input type="checkbox" formControlName="Acceptterm" class="form-check-input me-2" [ngClass]="{'is-invalid':submitted && f['Acceptterm'].errors}"/>
+          <label for="Acceptterm" class="form-check-label">Accept terms & conditions </label>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-success me-2">{{buttontext}}</button>
+          <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-header cl-color">User List</h5>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col">
+        <table class="table table-striped">
+          <tr>
+            <th>Name</th>
+            <th>Date of birth</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Actions</th>
+          </tr>
+          <tr *ngFor="let item of data">
+            <td>{{item.title}} {{item.firstname}} {{item.lastname}}</td>
+            <td>{{item.dob}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.password}}</td>
+            <td><i class="fa fa-pencil-square-o" style="color: green;" (click)="update(item.id)"></i>
+              <i class="fa fa-trash-o" style="color: red;" (click)="delete(item.id)"></i></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
